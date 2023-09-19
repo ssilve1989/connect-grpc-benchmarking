@@ -1,7 +1,8 @@
 #!/bin/bash
 
-ghz --proto ./echo/echo_service.proto \
+ghz --proto ./echo/v1/echo_service.proto \
 --insecure \
--n 100000 \
---call echo.EchoService/Echo \
+-n 25000 \
+-c 1000 \
+--call echo.v1.EchoService/Echo \
 --async localhost:5000
