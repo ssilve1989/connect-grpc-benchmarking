@@ -7,7 +7,7 @@ node ./bufbuild-fastify/main.mjs &
 serverPid=$!
 
 # run client benchmark script in foreground
-./scripts/benchmark.mjs --type connect 
+./scripts/benchmark.mjs --type connect "$@"
 
 # when it exits exit the server
 kill $serverPid
