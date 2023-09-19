@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 import { createPromiseClient } from '@connectrpc/connect';
-import * as url from 'url';
-import path from 'node:path';
-import protoLoader from '@grpc/proto-loader';
-import grpc from '@grpc/grpc-js';
 import {
   createConnectTransport,
   createGrpcTransport,
 } from '@connectrpc/connect-node';
-import { interval, mergeMap, reduce, repeat, takeUntil, timer } from 'rxjs';
+import grpc from '@grpc/grpc-js';
+import protoLoader from '@grpc/proto-loader';
+import path from 'node:path';
+import { interval, mergeMap, reduce, takeUntil, timer } from 'rxjs';
+import * as url from 'url';
 import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
 import { EchoService } from '../gen/v1/echo_service_connect.mjs';
@@ -62,7 +62,6 @@ function grpcJsBenchmark() {
   const duration$ = timer(duration * 1000);
   const work$ = interval().pipe(
     mergeMap(request, concurrency),
-    repeat(),
     takeUntil(duration$)
   );
 
@@ -92,7 +91,6 @@ function connectBenchmark() {
   const duration$ = timer(duration * 1000);
   const work$ = interval().pipe(
     mergeMap(request, concurrency),
-    repeat(),
     takeUntil(duration$)
   );
 
