@@ -7,7 +7,7 @@ import { echo } from './handlers.mjs';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const packageDefinition = protoLoader.loadSync(
-  path.join(__dirname, '..', 'echo', 'echo_service.proto'),
+  path.join(__dirname, '..', 'echo', 'v1', 'echo_service.proto'),
   {
     keepCase: true,
     longs: String,
@@ -20,7 +20,7 @@ const packageDefinition = protoLoader.loadSync(
 const serviceDefinition = grpc.loadPackageDefinition(packageDefinition);
 
 const server = new grpc.Server();
-server.addService(serviceDefinition.echo.EchoService.service, {
+server.addService(serviceDefinition.echo.v1.EchoService.service, {
   echo,
 });
 

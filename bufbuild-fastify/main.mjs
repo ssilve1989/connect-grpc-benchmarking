@@ -1,8 +1,6 @@
-import { EchoService } from '../gen/v1/echo_service_connect.mjs';
-import { connectNodeAdapter } from '@connectrpc/connect-node';
-import { createServer } from 'http2';
-import { fastify } from 'fastify';
 import { fastifyConnectPlugin } from '@bufbuild/connect-fastify';
+import { fastify } from 'fastify';
+import { EchoService } from '../gen/v1/echo_service_connect.mjs';
 
 function routes(router) {
   return router.service(EchoService, {
@@ -13,7 +11,7 @@ function routes(router) {
 }
 
 // const server = createServer(connectNodeAdapter({ routes }));
-const server = fastify({ http2: true });
+const server = fastify({ http2: true, logger: false });
 await server.register(fastifyConnectPlugin, { routes });
 await server.listen({ host: '0.0.0.0', port: 5000 });
 console.log(`server listenting at`, 'port 5000');
