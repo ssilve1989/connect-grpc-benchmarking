@@ -1,3 +1,4 @@
+// @ts-check
 import { fastifyConnectPlugin } from '@bufbuild/connect-fastify';
 import { fastify } from 'fastify';
 import { EchoService } from '../gen/v1/echo_service_connect.mjs';
